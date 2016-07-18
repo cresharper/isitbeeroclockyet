@@ -1,4 +1,4 @@
-document.addEventListener('load', theClock);
+window.addEventListener('load', theClock);
 
 function theClock()
     {
@@ -17,10 +17,32 @@ function theClock()
         h+':'+m+':'+s+' '+ampm;
         var t=setTimeout(theClock,500);
 
+        var video = $('#tubular-container');
+
         if (h >= 3) {
             document.getElementById('yes-or-no').innerHTML="YES";
-            $('#video-bg').tubular({videoId: '0Bmhjf0rKe8'});
-        } else {
+            if (video.length == 0) {
+                $(function() {
+                    var options = { videoId: 'O-jOEAufDQ4', start: 0, mute: false };
+                    $('#video-bg').tubular(options);
+                    $('#yes-or-no').effect('pulsate');
+                });
+            }
+            
+        } 
+
+        else {
             document.getElementById('yes-or-no').innerHTML="NO";
+            $(function() {
+                $('#tubular-container').remove();
+            });
         }
+
 }
+
+//plugin fires here
+$(document).ready(function() {
+    var options = { videoId: 'O-jOEAufDQ4', start: 0, mute: false };
+    $('#video-bg').tubular(options);
+});
+
