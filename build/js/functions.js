@@ -40,6 +40,7 @@ function theClock()
 
 }
 
+//plugin fires here
 $(document).ready(function() {
     var options = { videoId: 'O-jOEAufDQ4', start: 0, mute: false };
     $('#video-bg').tubular(options);
