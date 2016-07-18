@@ -19,7 +19,7 @@ function theClock()
 
         var video = $('#tubular-container');
 
-        if (h >= 3) {
+        if (h >= 3 && ampm == 'PM') {
             document.getElementById('yes-or-no').innerHTML="YES";
             if (video.length == 0) {
                 $(function() {
