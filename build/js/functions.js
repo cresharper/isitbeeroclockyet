@@ -32,7 +32,7 @@ function theClock()
         } 
 
         else {
-            document.getElementById('yes-or-no').innerHTML="NO";
+            document.getElementById('yes-or-no').innerHTML="NO :(";
             $(function() {
                 $('#tubular-container').remove();
             });
