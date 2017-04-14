@@ -1,4 +1,10 @@
-window.addEventListener('load', theClock);
+$(document).ready(function() {
+    var videoptions = { videoId: 'O-jOEAufDQ4', start: 0, mute: false }
+    var videoptionsmute = { mute: true }
+    $('#video-bg').tubular(videoptions);
+});
+
+$(document).ready(theClock);
 
 function theClock()
     {
@@ -6,43 +12,33 @@ function theClock()
         var h = today.getHours();
         var m = today.getMinutes();
         var s = today.getSeconds();
-        h = h % 12;
-        h= h ? h : 12; // the hour '0' should be '12'
-        var ampm = h >= 12 ? 'AM' : 'PM';
+        var ampm = h <= 11 ? 'AM' : 'PM';
         m = m < 10 ? '0'+m : m;
         s = s <10 ? '0'+s: s;
-    // add a zero in front of numbers<10
+        var domh = h % 12;
+        domh = domh ? domh : 12; // the hour '0' should be '12'
 
         document.getElementById('the-time').innerHTML=
-        h+':'+m+':'+s+' '+ampm;
+        domh+':'+m+':'+s+' '+ampm;
         var t=setTimeout(theClock,500);
 
-        var video = $('#tubular-container');
+        $("#time-selection").change(function() {
 
-        if (h >= 3) {
-            document.getElementById('yes-or-no').innerHTML="YES";
-            if (video.length == 0) {
-                $(function() {
-                    var options = { videoId: 'O-jOEAufDQ4', start: 0, mute: false };
-                    $('#video-bg').tubular(options);
-                    $('#yes-or-no').effect('pulsate');
-                });
-            }
-            
-        } 
+            var selectedtime = this.value;
 
-        else {
-            document.getElementById('yes-or-no').innerHTML="NO";
-            $(function() {
+            var video = $('#tubular-container');
+
+            if (h >= selectedtime) {
+                document.getElementById('yes-or-no').innerHTML="YES";
+                if (video.length == 0) {
+                    $('#video-bg').tubular({ videoId: 'O-jOEAufDQ4', start: 0, mute: true });
+                }
+            } 
+            else {
+                document.getElementById('yes-or-no').innerHTML="NO";
                 $('#tubular-container').remove();
-            });
-        }
+            }
+
+        });
 
 }
-
-//plugin fires here
-$(document).ready(function() {
-    var options = { videoId: 'O-jOEAufDQ4', start: 0, mute: false };
-    $('#video-bg').tubular(options);
-});
-
